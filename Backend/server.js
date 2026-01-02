@@ -1,21 +1,35 @@
-const express = require("express")
-const app = express()
-const connection = require("./config/db.js")
-const ContactRouter = require("./routes/Contact.routes.js")
-const cors = require("cors")
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
-app.use(express.json())
-app.use(cors())
-app.use("/api",ContactRouter)
+const connection = require("./config/db");
+const ContactRouter = require("./routes/Contact.routes");
 
+const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-app.listen(process.env.port,async()=>{
-    try {
-      await connection
-      console.log("Server is connected with DB")
-    } catch (error) {
-      console.log("Server is not connected with DB")
-    }
-    console.log(`Server is listening on Port : ${process.env.port} and Url http://localhost:${process.env.port}`)
-})
+// Routes
+app.use("/api", ContactRouter);
+
+// Port
+const PORT = process.env.PORT || 5000;
+
+// Server start
+const startServer = async () => {
+  try {
+    await connection;
+    console.log("✅ Database connected successfully");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🔗 URL: http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ Database connection failed:", error.message);
+  }
+};
+
+startServer();
