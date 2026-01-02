@@ -28,10 +28,10 @@ To run the Contact Management Application locally, follow these steps:
 
 ### Backend Setup
 
-1. Clone the repository:
+1. Clone the repository:https://github.com/sh-ubham1/Web-Developer-Interview-Task.git
 
    ```bash
-   git clone https://github.com/Adesh856/Contact_Managment_App.git
+   git clone 
    ```
 
 2. Navigate to the backend directory:
